@@ -1,0 +1,195 @@
+﻿@model IEnumerable<Libreria2.Models.Producto>
+
+
+@{
+    ViewData["Title"] = "Gestión de Producto";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">@ViewData["Title"]</h1>
+                    <!-- Botón para abrir el modal de agregar producto -->
+                    <button class="btn btn-success" data-toggle="modal" data-target="#modalAgregarProducto">Agregar Producto</button>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Buscar por categoría, ubicación o stock bajo">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Buscar</button>
+                    </div>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID del Producto</th>
+                            <th>Nombre del Producto</th>
+                            <th>Stock Actual</th>
+                            <th>Fecha de Última Actualización</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var producto in Model)
+                        {
+                            <tr>
+                                <td>@producto.id_producto</td>
+                                <td>@producto.titulo</td>
+                                <td>@producto.cantidad_mayoreo</td>
+                                <td>@producto.fecha_registro</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEditarProducto" data-id="@producto.id_producto" data-titulo="@producto.titulo" data-isbn="@producto.isbn" data-autor="@producto.autor" data-editorial="@producto.editorial" data-preciomenudeo="@producto.precio_menudeo" data-preciomayoreo="@producto.precio_mayoreo" data-cantidad="@producto.cantidad_mayoreo">Editar</button>
+                                    <form asp-action="EliminarProducto" method="post" style="display:inline;">
+                                        <input type="hidden" name="id_producto" value="@producto.id_producto" />
+                                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal para agregar producto -->
+    <div class="modal fade" id="modalAgregarProducto" tabindex="-1" role="dialog" aria-labelledby="modalAgregarProductoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAgregarProductoLabel">Agregar Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form asp-action="CrearProducto" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="isbn">ISBN</label>
+                            <input type="text" class="form-control" id="isbn" name="isbn" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="titulo">Título</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="autor">Autor</label>
+                            <input type="text" class="form-control" id="autor" name="autor" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="editorial">Editorial</label>
+                            <input type="text" class="form-control" id="editorial" name="editorial" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="precio_menudeo">Precio Menudeo</label>
+                            <input type="number" class="form-control" id="precio_menudeo" name="precio_menudeo" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="precio_mayoreo">Precio Mayoreo</label>
+                            <input type="number" class="form-control" id="precio_mayoreo" name="precio_mayoreo" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad_mayoreo">Cantidad Mayoreo</label>
+                            <input type="number" class="form-control" id="cantidad_mayoreo" name="cantidad_mayoreo" required />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar producto -->
+    <div class="modal fade" id="modalEditarProducto" tabindex="-1" role="dialog" aria-labelledby="modalEditarProductoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditarProductoLabel">Editar Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form asp-action="EditarProducto" method="post">
+                    <div class="modal-body">
+                        <input type="hidden" id="id_producto" name="id_producto" />
+                        <div class="form-group">
+                            <label for="isbn">ISBN</label>
+                            <input type="text" class="form-control" id="isbn" name="isbn" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="titulo">Título</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="autor">Autor</label>
+                            <input type="text" class="form-control" id="autor" name="autor" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="editorial">Editorial</label>
+                            <input type="text" class="form-control" id="editorial" name="editorial" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="precio_menudeo">Precio Menudeo</label>
+                            <input type="number" class="form-control" id="precio_menudeo" name="precio_menudeo" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="precio_mayoreo">Precio Mayoreo</label>
+                            <input type="number" class="form-control" id="precio_mayoreo" name="precio_mayoreo" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad_mayoreo">Cantidad Mayoreo</label>
+                            <input type="number" class="form-control" id="cantidad_mayoreo" name="cantidad_mayoreo" required />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Llenar el modal de edición con los datos del producto
+        $('#modalEditarProducto').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var idProducto = button.data('id');
+            var titulo = button.data('titulo');
+            var isbn = button.data('isbn');
+            var autor = button.data('autor');
+            var editorial = button.data('editorial');
+            var precioMenudeo = button.data('preciomenudeo');
+            var precioMayoreo = button.data('preciomayoreo');
+            var cantidad = button.data('cantidad');
+
+            var modal = $(this);
+            modal.find('#id_producto').val(idProducto);
+            modal.find('#titulo').val(titulo);
+            modal.find('#isbn').val(isbn);
+            modal.find('#autor').val(autor);
+            modal.find('#editorial').val(editorial);
+            modal.find('#precio_menudeo').val(precioMenudeo);
+            modal.find('#precio_mayoreo').val(precioMayoreo);
+            modal.find('#cantidad_mayoreo').val(cantidad);
+        });
+    </script>
+</body>
+</html>
