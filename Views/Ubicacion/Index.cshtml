@@ -20,7 +20,7 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">@ViewData["Title"]</h1>
                     <!-- Botón para abrir el modal de generar nueva ubicación -->
-                    <button class="btn btn-success" data-toggle="modal" data-target="#modalAgregarAlmacen">Agregar Nueva ubicación</button>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#modalAgregarUbicacion">Agregar Nueva ubicación</button>
                 </div>
 
                 <div class="input-group mb-3">
@@ -33,8 +33,8 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID del Almacen</th>
-                            <th>Nombre</th>
+                            <th>ID de la ubicación</th>
+                            <th>Descripción</th>
                             <th>Observaciones</th>
                             <th>Estatus</th>
                             <th>Fecha de Última Actualización</th>
@@ -42,27 +42,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var almacen in Model)
+                        @foreach (var ubicacion in Model)
                         {
                             <tr>
-                                <td>@almacen.idAlmacen</td>
-                                <td>@almacen.nombre</td>
-                                <td>@almacen.observaciones</td>
-                                <td>@almacen.status</td>
-                                <td>@almacen.fecha</td>
+                                <td>@ubicacion.idUbicacion</td>
+                                <td>@ubicacion.descripcion</td>
+                                <td>@ubicacion.observaciones</td>
+                                <td>@ubicacion.estatus</td>
+                                <td>@ubicacion.fecha</td>
                                 <td>
-                                    @if (almacen.status == 1)
+                                    @if (ubicacion.estatus == 1)
                                     {
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEditarAlmacen" data-idalmacen="@almacen.idAlmacen" data-nombre="@almacen.nombre" data-observaciones="@almacen.observaciones" data-status="@almacen.status">Editar</button>
-                                        <form asp-action="EliminarAlmacen" method="post" style="display:inline;">
-                                            <input type="hidden" name="idAlmacen" value="@almacen.idAlmacen" />
+                                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEditarUbicacion" data-idubicacion="@ubicacion.idUbicacion" data-descripcion="@ubicacion.descripcion" data-observaciones="@ubicacion.observaciones" data-estatus="@ubicacion.estatus">Editar</button>
+                                        <form asp-action="EliminarUbicacion" method="post" style="display:inline;">
+                                            <input type="hidden" name="idAlmacen" value="@ubicacion.idUbicacion" />
                                             <button type="submit" class="btn btn-sm btn-danger">Deshabilitar</button>
                                         </form>
                                     }
-                                    else if (almacen.status == 2)
+                                    else if (ubicacion.estatus == 2)
                                     {
                                         <form asp-action="RehabilitarAlmacen" method="post" style="display:inline;">
-                                            <input type="hidden" name="idAlmacen" value="@almacen.idAlmacen" />
+                                            <input type="hidden" name="idAlmacen" value="@ubicacion.idUbicacion" />
                                             <button type="submit" class="btn btn-sm btn-success">Habilitar</button>
                                         </form>
                                     }
@@ -76,28 +76,18 @@
         </div>
     </div>
 
-    <!-- Modal para agregar almacen -->
-    <div class="modal fade" id="modalAgregarAlmacen" tabindex="-1" role="dialog" aria-labelledby="modalAgregarAlmacenLabel" aria-hidden="true">
+    <!-- Modal para agregar Ubicacion -->
+    <div class="modal fade" id="modalAgregarUbicacion" tabindex="-1" role="dialog" aria-labelledby="modalAgregarUbicacionLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalAgregarAlmacenLabel">Agregar Almacen</h5>
+                    <h5 class="modal-title" id="modalAgregarUbicacionLabel">Agregar Ubicacion</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form asp-action="CrearAlmacen" method="post">
+                <form asp-action="CrearUbicacion" method="post">
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required />
-                            @if (TempData["ErrorAgregarAlmacen"] != null)
-                            {
-                                <div id="errorAlertaAgregarAlmacen" class="alert alert-danger">
-                                    @TempData["ErrorAgregarAlmacen"]
-                                </div>
-                            }
-                        </div>
                         <div class="form-group">
                             <label for="observaciones">Observaciones (Opcional)</label>
                             <textarea class="form-control" id="observaciones" name="observaciones" rows="4" data-val="false"></textarea>
@@ -112,30 +102,21 @@
         </div>
     </div>
 
-    <!-- Modal para editar producto -->
-    <div class="modal fade" id="modalEditarAlmacen" tabindex="-1" role="dialog" aria-labelledby="modalEditarAlmacenLabel" aria-hidden="true">
+    <!-- Modal para editar ubicacion -->
+    <div class="modal fade" id="modalEditarUbicacion" tabindex="-1" role="dialog" aria-labelledby="modalEditarUbicacionLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditarAlmacenLabel">Editar Almacen</h5>
+                    <h5 class="modal-title" id="modalEditarUbicacionLabel">Editar Ubicacion</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form asp-action="EditarAlmacen" method="post">
+                <form asp-action="EditarUbicacion" method="post">
                     <div class="modal-body">
-                        <input type="hidden" id="idalmacen" name="idalmacen" />
-                        <input type="hidden" id="status" name="status" />
-                        <div class="form-group">
-                            <label for="isbn">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required />
-                            @if (TempData["ErrorEditarAlmacen"] != null)
-                            {
-                                <div id="errorAlertaEditarAlmacen" class="alert alert-danger">
-                                    @TempData["ErrorEditarAlmacen"]
-                                </div>
-                            }
-                        </div>
+                        <input type="hidden" id="idubicacion" name="idubicacion" />
+                        <input type="hidden" id="descripcion" name="descripcion" />
+                        <input type="hidden" id="estatus" name="estatus" />
                         <div class="form-group">
                             <label for="observaciones">Observaciones (Opcional)</label>
                             <textarea class="form-control" id="observaciones" name="observaciones" rows="4"></textarea>
@@ -155,76 +136,19 @@
 
     <script>
         // Llenar el modal de edición con los datos del almacen
-        $('#modalEditarAlmacen').on('show.bs.modal', function (event) {
+        $('#modalEditarUbicacion').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
-            var idalmacen = button.data('idalmacen');
-            var nombre = button.data('nombre');
+            var idubicacion = button.data('idubicacion');
+            var descripcion = button.data('descripcion');
             var observaciones = button.data('observaciones');
-            var status = button.data('status');
+            var estatus = button.data('estatus');
 
             var modal = $(this);
-            modal.find('#idalmacen').val(idalmacen);
-            modal.find('#nombre').val(nombre);
+            modal.find('#idubicacion').val(idubicacion);
+            modal.find('#descripcion').val(descripcion);
             modal.find('#observaciones').val(observaciones);
-            modal.find('#status').val(status);
+            modal.find('#estatus').val(estatus);
         });
     </script>
-
-    @if (TempData["ErrorAgregarAlmacen"] != null)
-    {
-
-        <script>
-                        $(document).ready(function () {
-                // Eliminar el fondo del modal si quedó bloqueado
-                $('.modal-backdrop').remove();
-                $('body').removeClass('modal-open');  // Evita que el fondo quede bloqueado
-
-                // Mostrar el modal con un pequeño retraso
-                setTimeout(function () {
-                    $('#modalAgregarAlmacen').modal('show');
-                }, 100);
-
-                // Detectar el clic en cualquier botón con data-dismiss="modal"
-                $('[data-dismiss="modal"]').on('click', function () {
-                    $('#modalAgregarAlmacen').modal('hide');
-
-                         // Ocultar la alerta cuando se cierre el modal
-                    $('#errorAlertaAgregarAlmacen').fadeOut(400, function () {
-                        $(this).remove(); // Remover la alerta del DOM después de desvanecerse
-                    });
-
-                });
-            });
-
-        </script>
-    }
-
-    @if (TempData["ErrorEditarAlmacen"] != null)
-    {
-
-        <script>
-                 document.addEventListener("DOMContentLoaded", function() {
-                var idAlmacen = "@TempData["EditIdAlmacen"]";
-                var boton = document.querySelector('button[data-idalmacen="' + idAlmacen + '"]');
-                if (boton) {
-                    boton.click(); // Simula un clic en el botón de edición correcto
-                }
-            });
-
-            $(document).ready(function () {
-
-            // Detectar el clic en cualquier botón con data-dismiss="modal"
-                $('[data-dismiss="modal"]').on('click', function () {
-                         // Ocultar la alerta cuando se cierre el modal
-                    $('#errorAlertaEditarAlmacen').fadeOut(400, function () {
-                        $(this).remove(); // Remover la alerta del DOM después de desvanecerse
-                    });
-
-                });
-            });
-
-        </script>
-    }
-
 </body>
 </html>
