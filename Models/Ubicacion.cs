@@ -13,8 +13,12 @@ namespace Libreria2.Models
         [Required]
         public string descripcion { get; set; } = "N/A";
 
-        [Required]
-        public string observaciones { get; set; } = "N/A";
+        private string? _observaciones;
+        public string? observaciones
+        {
+            get => _observaciones;
+            set => _observaciones = string.IsNullOrWhiteSpace(value) ? "N/A" : value;
+        }
 
         [Required]
         public int estatus { get; set; } = 1;

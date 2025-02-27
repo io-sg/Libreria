@@ -55,14 +55,14 @@
                                     {
                                         <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEditarUbicacion" data-idubicacion="@ubicacion.idUbicacion" data-descripcion="@ubicacion.descripcion" data-observaciones="@ubicacion.observaciones" data-estatus="@ubicacion.estatus">Editar</button>
                                         <form asp-action="EliminarUbicacion" method="post" style="display:inline;">
-                                            <input type="hidden" name="idAlmacen" value="@ubicacion.idUbicacion" />
+                                            <input type="hidden" name="idUbicacion" value="@ubicacion.idUbicacion" />
                                             <button type="submit" class="btn btn-sm btn-danger">Deshabilitar</button>
                                         </form>
                                     }
                                     else if (ubicacion.estatus == 2)
                                     {
-                                        <form asp-action="RehabilitarAlmacen" method="post" style="display:inline;">
-                                            <input type="hidden" name="idAlmacen" value="@ubicacion.idUbicacion" />
+                                        <form asp-action="RehabilitarUbicacion" method="post" style="display:inline;">
+                                            <input type="hidden" name="idUbicacion" value="@ubicacion.idUbicacion" />
                                             <button type="submit" class="btn btn-sm btn-success">Habilitar</button>
                                         </form>
                                     }
