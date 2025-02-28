@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Stock</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <main role="main" class="col-md-12 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Gestión de Stock</h1>
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar por categoría, ubicación o stock bajo">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Buscar</button>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID del Producto</th>
+                        <th>Nombre del Producto</th>
+                        <th>Stock Actual</th>
+                        <th>Fecha de Última Actualización</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>El Principito</td>
+                        <td>10</td>
+                        <td>2023-10-01</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">Actualizar Stock</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

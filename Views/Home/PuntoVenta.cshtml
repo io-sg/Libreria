@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punto de Venta</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+    <div class="container-fluid">
+        <div class="row">
+            
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Punto de Venta</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Buscar producto por ISBN o título">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button">Buscar</button>
+                            </div>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Subtotal</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Ejemplo de producto -->
+                                <tr>
+                                    <td>El Principito</td>
+                                    <td><input type="number" class="form-control" value="1" min="1"></td>
+                                    <td>$10.00</td>
+                                    <td>$10.00</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-success">Agregar Producto</button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Resumen de Venta</h5>
+                                <p class="card-text">Total: $10.00</p>
+                                <div class="form-group">
+                                    <label for="paymentMethod">Modo de Pago</label>
+                                    <select class="form-control" id="paymentMethod">
+                                        <option>Efectivo</option>
+                                        <option>Tarjeta de Débito</option>
+                                        <option>Tarjeta de Crédito</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="change">Cambio a Entregar</label>
+                                    <input type="text" class="form-control" id="change" placeholder="Cambio">
+                                </div>
+                                <button class="btn btn-primary w-100">Terminar Venta</button>
+                                <button class="btn btn-danger w-100 mt-2">Cancelar Venta</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

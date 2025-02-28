@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Ventas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <main role="main" class="col-md-12 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Gestión de Ventas</h1>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addSaleModal">Agregar Venta</button>
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar por cliente o factura">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Buscar</button>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Factura</th>
+                        <th>Monto</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan Pérez</td>
+                        <td>FAC-001</td>
+                        <td>$100.00</td>
+                        <td>2023-10-01</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning">Editar</button>
+                            <button class="btn btn-sm btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+    <!-- Modal para agregar/editar ventas -->
+    <div class="modal fade" id="addSaleModal" tabindex="-1" role="dialog" aria-labelledby="addSaleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSaleModalLabel">Agregar Venta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="client">Cliente</label>
+                            <input type="text" class="form-control" id="client" placeholder="Cliente">
+                        </div>
+                        <div class="form-group">
+                            <label for="invoice">Factura</label>
+                            <input type="text" class="form-control" id="invoice" placeholder="Factura">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Monto</label>
+                            <input type="number" class="form-control" id="amount" placeholder="Monto">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Fecha</label>
+                            <input type="date" class="form-control" id="date">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

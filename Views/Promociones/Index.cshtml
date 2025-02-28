@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Promociones</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <main role="main" class="col-md-12 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Gestión de Promociones</h1>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addPromotionModal">Agregar Promoción</button>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre del Producto</th>
+                        <th>Descuento</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Fecha de Fin</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>El Principito</td>
+                        <td>10%</td>
+                        <td>2023-10-01</td>
+                        <td>2023-10-15</td>
+                        <td>Activa</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning">Editar</button>
+                            <button class="btn btn-sm btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+    <!-- Modal para agregar/editar promociones -->
+    <div class="modal fade" id="addPromotionModal" tabindex="-1" role="dialog" aria-labelledby="addPromotionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPromotionModalLabel">Agregar Promoción</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="product">Producto</label>
+                            <select class="form-control" id="product">
+                                <option>El Principito</option>
+                                <option>Otro Libro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="discount">Descuento</label>
+                            <input type="text" class="form-control" id="discount" placeholder="Descuento">
+                        </div>
+                        <div class="form-group">
+                            <label for="startDate">Fecha de Inicio</label>
+                            <input type="date" class="form-control" id="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">Fecha de Fin</label>
+                            <input type="date" class="form-control" id="endDate">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
